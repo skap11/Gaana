@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GaanaModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="GaanaModelStoreContainer">
+          <EntitySet Name="Appsec_Login" EntityType="GaanaModel.Store.Appsec_Login" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Appsec_user" EntityType="GaanaModel.Store.Appsec_user" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Appsec_Login_Appsec_user" Association="GaanaModel.Store.FK_Appsec_Login_Appsec_user">
+            <End Role="Appsec_user" EntitySet="Appsec_user" />
+            <End Role="Appsec_Login" EntitySet="Appsec_Login" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Appsec_Login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Password" Type="nchar" Nullable="false" MaxLength="20" />
+          <Property Name="LoginTime" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Appsec_user">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Appsec_Login_Appsec_user">
+          <End Role="Appsec_user" Type="GaanaModel.Store.Appsec_user" Multiplicity="1" />
+          <End Role="Appsec_Login" Type="GaanaModel.Store.Appsec_Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appsec_user">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Appsec_Login">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GaanaModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="GaanaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Appsec_Login" EntityType="GaanaModel.Appsec_Login" />
+          <EntitySet Name="Appsec_user" EntityType="GaanaModel.Appsec_user" />
+          <AssociationSet Name="FK_Appsec_Login_Appsec_user" Association="GaanaModel.FK_Appsec_Login_Appsec_user">
+            <End Role="Appsec_user" EntitySet="Appsec_user" />
+            <End Role="Appsec_Login" EntitySet="Appsec_Login" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Appsec_Login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="LoginTime" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Appsec_user" Relationship="GaanaModel.FK_Appsec_Login_Appsec_user" FromRole="Appsec_Login" ToRole="Appsec_user" />
+        </EntityType>
+        <EntityType Name="Appsec_user">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="FirstName" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Appsec_Login" Relationship="GaanaModel.FK_Appsec_Login_Appsec_user" FromRole="Appsec_user" ToRole="Appsec_Login" />
+        </EntityType>
+        <Association Name="FK_Appsec_Login_Appsec_user">
+          <End Role="Appsec_user" Type="GaanaModel.Appsec_user" Multiplicity="1" />
+          <End Role="Appsec_Login" Type="GaanaModel.Appsec_Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appsec_user">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Appsec_Login">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GaanaModelStoreContainer" CdmEntityContainer="GaanaEntities">
+          <EntitySetMapping Name="Appsec_Login">
+            <EntityTypeMapping TypeName="GaanaModel.Appsec_Login">
+              <MappingFragment StoreEntitySet="Appsec_Login">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Appsec_user">
+            <EntityTypeMapping TypeName="GaanaModel.Appsec_user">
+              <MappingFragment StoreEntitySet="Appsec_user">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Gaana">
+        <EntityTypeShape EntityType="GaanaModel.Appsec_Login" Width="1.5" PointX="3" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="GaanaModel.Appsec_user" Width="1.5" PointX="0.75" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
+        <AssociationConnector Association="GaanaModel.FK_Appsec_Login_Appsec_user" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.8651432291666668" />
+          <ConnectorPoint PointX="3" PointY="1.8651432291666668" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

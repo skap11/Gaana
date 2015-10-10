@@ -1,0 +1,8 @@
+﻿@model Web.Models.UserAuthModel
+
+using(@Html.BeginForm("LogIn","Account",FormMethod.Post))
+{
+@Html.TextBoxFor(m => m.Username)
+@Html.TextBoxFor(m => m.Password)
+<input type= "submit" value= "Login" />
+}

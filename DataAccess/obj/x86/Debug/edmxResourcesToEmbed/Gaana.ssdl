@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GaanaModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="GaanaModelStoreContainer">
+    <EntitySet Name="Appsec_Login" EntityType="GaanaModel.Store.Appsec_Login" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Appsec_user" EntityType="GaanaModel.Store.Appsec_user" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Appsec_Login_Appsec_user" Association="GaanaModel.Store.FK_Appsec_Login_Appsec_user">
+      <End Role="Appsec_user" EntitySet="Appsec_user" />
+      <End Role="Appsec_Login" EntitySet="Appsec_Login" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Appsec_Login">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="Password" Type="nchar" Nullable="false" MaxLength="20" />
+    <Property Name="LoginTime" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="Appsec_user">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Appsec_Login_Appsec_user">
+    <End Role="Appsec_user" Type="GaanaModel.Store.Appsec_user" Multiplicity="1" />
+    <End Role="Appsec_Login" Type="GaanaModel.Store.Appsec_Login" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Appsec_user">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Appsec_Login">
+        <PropertyRef Name="Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

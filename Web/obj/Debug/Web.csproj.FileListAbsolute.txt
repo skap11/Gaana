@@ -1,0 +1,6 @@
+c:\users\abc\documents\visual studio 2010\Projects\Gaana\Web\bin\Web.dll
+c:\users\abc\documents\visual studio 2010\Projects\Gaana\Web\bin\Web.pdb
+c:\users\abc\documents\visual studio 2010\Projects\Gaana\Web\bin\EntityFramework.dll
+c:\users\abc\documents\visual studio 2010\Projects\Gaana\Web\bin\EntityFramework.xml
+c:\users\abc\documents\visual studio 2010\Projects\Gaana\Web\obj\Debug\Web.dll
+c:\users\abc\documents\visual studio 2010\Projects\Gaana\Web\obj\Debug\Web.pdb
